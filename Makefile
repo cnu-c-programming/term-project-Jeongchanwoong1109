@@ -1,17 +1,16 @@
 CC     = gcc
-CFLAGS = -Wall -Wextra -std=c11
-
-# TODO: Add all your .c source files here (e.g., student.c file_io.c command.c)
-SRCS   = main.c
+CFLAGS = -Wall -Wextra -g
+SRCS   = main.c student.c file_io.c command.c
+HDRS   = student.h file_io.h command.h
 
 .PHONY: all admin client clean
 
 all: admin client
 
-admin:
+admin: $(SRCS) $(HDRS)
 	$(CC) $(CFLAGS) -DADMIN_MODE $(SRCS) -o admin_shell
 
-client:
+client: $(SRCS) $(HDRS)
 	$(CC) $(CFLAGS) -DCLIENT_MODE $(SRCS) -o client_shell
 
 clean:
